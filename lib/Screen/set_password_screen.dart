@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../Rest Api/rest_api.dart';
 import '../Style/style.dart';
 import '../Utility/url.dart';
 import '../controller/set_password_controller.dart';
 import 'login_screen.dart';
 
-class SetPasswordScreen extends StatefulWidget {
-  const SetPasswordScreen({super.key});
-
-  @override
-  State<SetPasswordScreen> createState() => _SetPasswordScreenState();
-}
-
-class _SetPasswordScreenState extends State<SetPasswordScreen> {
+class SetPasswordScreen extends StatelessWidget {
+   SetPasswordScreen({super.key});
   final SetPasswordController controller = Get.put(SetPasswordController());
+
   Future<bool> setPasswordRequest() async {
     try {
       controller.loading.value = true;
@@ -60,8 +54,7 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.01,
                     ),
-                    GreyTextStyle(
-                        "Minimum length password 8 character with letter and number cobination"),
+                    GreyTextStyle("Minimum length password 8 characters with a letter and number combination"),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
@@ -85,34 +78,35 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     ElevatedButton(
-                        style: ElevattedButtonStyle(),
-                        onPressed: () async {
-                          bool res = await setPasswordRequest();
-                          if (res) {
-                            Get.offAll(() => const LoginScreen());
-                          }
-                        },
-                        child: Obx(() => ButtonChildStyleText(controller.loading.value ? "Loading..." : "Confirm")),
-                        ),
+                      style: ElevattedButtonStyle(),
+                      onPressed: () async {
+                        bool res = await setPasswordRequest();
+                        if (res) {
+                          Get.offAll(() => const LoginScreen());
+                        }
+                      },
+                      child: Obx(() => ButtonChildStyleText(controller.loading.value ? "Loading..." : "Confirm")),
+                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.0,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        BoldSmallTextStyle("Have account?"),
+                        BoldSmallTextStyle("Have an account?"),
                         TextButton(
-                            onPressed: () {
-                              Get.off(() => const LoginScreen());
-                            },
-                            child: TextButtonChildStyle("Sign In"))
+                          onPressed: () {
+                            Get.off(() => const LoginScreen());
+                          },
+                          child: TextButtonChildStyle("Sign In"),
+                        ),
                       ],
                     )
                   ],
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

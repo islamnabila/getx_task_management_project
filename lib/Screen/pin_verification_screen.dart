@@ -84,7 +84,7 @@ class _PinVerificationScreenState extends State<PinVerificationScreen> {
                             );
 
                             if (res) {
-                              Get.to(() => const SetPasswordScreen());
+                              Get.to(() => SetPasswordScreen());
                             }
                           } else {
                             print("EmailVerification is null");
